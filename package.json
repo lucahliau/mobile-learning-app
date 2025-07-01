@@ -1,0 +1,16 @@
+{
+    "name": "learning-app-backend",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node api/chat.js"
+    },
+    "dependencies": {
+        "@google/generative-ai": "^0.24.1",
+        "@vercel/analytics": "^1.5.0",
+        "@vercel/speed-insights": "^1.2.0",
+        "axios": "^1.7.2",
+        "cors": "^2.8.5",
+        "express": "^4.19.2"
+    }
+}
