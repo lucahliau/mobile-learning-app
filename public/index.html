@@ -1872,7 +1872,7 @@
     <div id="appContainer" style="display: none;">
         </div>
     <!-- This is the new Landing Page View -->
-<div id="landingView" class="view active">
+<div id="landingView" class="view">
     <div class="landing-header">
         <div style="display: flex; align-items: center; gap: 30px;">
             <h1>Your Learning Topics</h1>
@@ -5019,6 +5019,8 @@ differenceModal.addEventListener('click', (event) => {
         const newTopicModal = document.getElementById('newTopicModal');
         // --- NEW: Event Listeners ---
 document.getElementById('newTopicBtn').addEventListener('click', openNewTopicModal);
+// Add this line to make the new mobile FAB work
+document.getElementById('newTopicBtnMobile').addEventListener('click', openNewTopicModal);
 document.getElementById('cancelTopicBtn').addEventListener('click', closeNewTopicModal);
 document.getElementById('submitTopicBtn').addEventListener('click', handleNewTopicSubmit);
 document.getElementById('mainMenuBtn').addEventListener('click', () => {
