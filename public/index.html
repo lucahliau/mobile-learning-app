@@ -1766,6 +1766,29 @@
     text-decoration: underline;
     color: #c2410c; /* A slightly darker purple on hover */
 }
+.fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #191970 0%, #34495e 100%);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.fab:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
             </style>
 
 <script>
@@ -1859,23 +1882,16 @@
                 <button class="sort-btn" data-sort="category">By Category</button>
             </div>
         </div>
-        <div style="display: flex; gap: 15px;">
-            <button class="new-topic-btn" id="graphLabBtn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8a6 6 0 0 0-8.4 0L3 18"/><path d="M12 12a3 3 0 0 0 4.2 0L21 6"/></svg>
-                Graph Lab
-            </button>
-            <button class="new-topic-btn" id="newTopicBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-7-7h14"/></svg>
-                Learn a new topic
-            </button>
-            <button class="nav-button" id="signOutBtn" style="border-width: 2px;">
-                Sign Out
-            </button>
         </div>
-    </div>
     <div id="topicGrid">
         <!-- Topic cards will be added here later -->
     </div>
+    <button class="fab" id="newTopicBtnMobile" title="Learn a new topic">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </button>
 </div>
 <div id="learningView" class="view">
 
