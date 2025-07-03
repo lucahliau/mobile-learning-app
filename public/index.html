@@ -4652,13 +4652,138 @@ async function checkConnection() {
 
         // Wait until the document is fully loaded to run this script
         document.addEventListener('DOMContentLoaded', function () {
+
+        // --- Element Selections ---
+const authView = document.getElementById('authView');
+const appContainer = document.getElementById('appContainer');
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
+const emailInput = document.getElementById('emailInput');
+const passwordInput = document.getElementById('passwordInput');
+const authError = document.getElementById('authError');
+const googleSignInBtn = document.getElementById('googleSignInBtn');
+const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+const resendVerificationBtn = document.getElementById('resendVerificationBtn');
+const checkVerificationBtn = document.getElementById('checkVerificationBtn');
+const signOutFromVerifyBtn = document.getElementById('signOutFromVerifyBtn');
+
+const deleteTopicBtn = document.getElementById('deleteTopicBtn');
+const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+
+const landingView = document.getElementById('landingView');
+const learningView = document.getElementById('learningView');
+const newTopicModal = document.getElementById('newTopicModal');
+const mainMenuBtn = document.getElementById('mainMenuBtn');
+const chatInput = document.getElementById('chatInput');
+const treeContainer = document.getElementById('treeContainer');
+const mainContent = document.getElementById('mainContent');
+
+const differenceModal = document.getElementById('differenceModal');
+const closeDifferenceModalBtn = document.getElementById('closeDifferenceModal');
+
+const graphLabBtn = document.getElementById('graphLabBtn');
+const graphLabModal = document.getElementById('graphLabModal');
+const cancelGraphBtn = document.getElementById('cancelGraphBtn');
+const submitGraphBtn = document.getElementById('submitGraphBtn');
+const graphDisplayModal = document.getElementById('graphDisplayModal');
+const closeGraphDisplayBtn = document.getElementById('closeGraphDisplayBtn');
+
+// --- Event Listeners ---
+
+// Authentication View
+loginBtn.addEventListener('click', () => { /* your existing login logic */ });
+signupBtn.addEventListener('click', () => { /* your existing signup logic */ });
+googleSignInBtn.addEventListener('click', () => { /* your existing google sign-in logic */ });
+forgotPasswordBtn.addEventListener('click', () => { /* your existing forgot password logic */ });
+
+// Email Verification View
+resendVerificationBtn.addEventListener('click', () => { /* your existing resend logic */ });
+checkVerificationBtn.addEventListener('click', () => { /* your existing check verification logic */ });
+signOutFromVerifyBtn.addEventListener('click', () => { auth.signOut(); });
+
+// Topic Deletion Modal
+deleteTopicBtn.addEventListener('click', openDeleteModal);
+cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+confirmDeleteBtn.addEventListener('click', () => { /* your existing confirm delete logic */ });
+deleteConfirmModal.addEventListener('click', (e) => {
+    if (e.target === deleteConfirmModal) {
+        closeDeleteModal();
+    }
+});
+
+// New Topic Modal
+document.getElementById('newTopicBtn').addEventListener('click', openNewTopicModal);
+document.getElementById('newTopicBtnMobile').addEventListener('click', openNewTopicModal);
+document.getElementById('cancelTopicBtn').addEventListener('click', closeNewTopicModal);
+document.getElementById('submitTopicBtn').addEventListener('click', handleNewTopicSubmit);
+document.getElementById('sophisticationSlider').addEventListener('click', (e) => {
+    if (e.target.classList.contains('sophistication-option')) {
+        document.querySelectorAll('.sophistication-option').forEach(opt => opt.classList.remove('active'));
+        e.target.classList.add('active');
+    }
+});
+newTopicModal.addEventListener('click', (e) => {
+    if (e.target === newTopicModal) {
+        closeNewTopicModal();
+    }
+});
+
+// Main Application Navigation & Interaction
+mainMenuBtn.addEventListener('click', () => {
+    renderTopicCards();
+    switchView('landingView');
+});
+document.getElementById('sortControls').addEventListener('click', (e) => {
+    if (e.target.matches('.sort-btn')) {
+        if (e.target.classList.contains('active')) return;
+        document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        currentSort = e.target.dataset.sort;
+        renderTopicCards();
+    }
+});
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+treeContainer.addEventListener('click', (e) => {
+    const nodeElement = e.target.closest('.tree-node-content');
+    if (nodeElement && nodeElement.dataset.nodeId) {
+        navigateToNode(nodeElement.dataset.nodeId);
+    }
+});
+
+// Tooltip Interaction
+mainContent.addEventListener('mouseover', (event) => { /* your existing mouseover logic */ });
+mainContent.addEventListener('mouseout', (event) => { /* your existing mouseout logic */ });
+
+// "What's the difference" Modal
+closeDifferenceModalBtn.addEventListener('click', closeDifferenceModal);
+differenceModal.addEventListener('click', (event) => {
+    if (event.target === differenceModal) {
+        closeDifferenceModal();
+    }
+});
+
+// Graph Lab Modals
+graphLabBtn.addEventListener('click', () => graphLabModal.classList.add('active'));
+cancelGraphBtn.addEventListener('click', () => graphLabModal.classList.remove('active'));
+submitGraphBtn.addEventListener('click', async () => { /* your existing graph generation logic */ });
+closeGraphDisplayBtn.addEventListener('click', () => graphDisplayModal.classList.remove('active'));
+graphLabModal.addEventListener('click', (e) => {
+    if (e.target === graphLabModal) graphLabModal.classList.remove('active');
+});
+graphDisplayModal.addEventListener('click', (e) => {
+    if (e.target === graphDisplayModal) graphDisplayModal.classList.remove('active');
+});
             // --- COLOR PALETTE FOR MULTI-LINE PLOTS ---
 
 // --- JavaScript for the 'What's the difference' modal ---
 
 // Get the modal and the close button
-const differenceModal = document.getElementById('differenceModal');
-const closeDifferenceModalBtn = document.getElementById('closeDifferenceModal');
 
 // Function to open the modal
 window.openDifferenceModal = function() {
@@ -5013,10 +5138,7 @@ differenceModal.addEventListener('click', (event) => {
                 document.body.style.userSelect = '';
                 document.body.style.pointerEvents = '';
             }
-             // --- NEW: DOM Element References ---
-         const landingView = document.getElementById('landingView');
-        const learningView = document.getElementById('learningView');
-        const newTopicModal = document.getElementById('newTopicModal');
+       
         // --- NEW: Event Listeners ---
 document.getElementById('newTopicBtn').addEventListener('click', openNewTopicModal);
 // Add this line to make the new mobile FAB work
@@ -5047,7 +5169,6 @@ newTopicModal.addEventListener('click', (e) => {
 
 // Initialize the app on the landing page
 // --- FINAL REVISION: Tooltip Repositioning Logic ---
-const mainContent = document.getElementById('mainContent');
 
 mainContent.addEventListener('mouseover', (event) => {
     const term = event.target.closest('.technical-term');
